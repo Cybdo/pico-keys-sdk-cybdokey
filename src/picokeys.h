@@ -31,7 +31,48 @@
 
 #include "file.h"
 #include "flash.h"
+#include "button.h"
 #include "debug.h"
+#include "serial.h"
+#include "pico_time.h"
+#include "rng/random.h"
+
+#define PICOKEY_OK PICOKEYS_OK
+#define PICOKEY_ERR_NO_MEMORY PICOKEYS_ERR_NO_MEMORY
+#define PICOKEY_ERR_MEMORY_FATAL PICOKEYS_ERR_MEMORY_FATAL
+#define PICOKEY_ERR_NULL_PARAM PICOKEYS_ERR_NULL_PARAM
+#define PICOKEY_ERR_FILE_NOT_FOUND PICOKEYS_ERR_FILE_NOT_FOUND
+#define PICOKEY_ERR_BLOCKED PICOKEYS_ERR_BLOCKED
+#define PICOKEY_NO_LOGIN PICOKEYS_NO_LOGIN
+#define PICOKEY_EXEC_ERROR PICOKEYS_EXEC_ERROR
+#define PICOKEY_WRONG_LENGTH PICOKEYS_WRONG_LENGTH
+#define PICOKEY_WRONG_DATA PICOKEYS_WRONG_DATA
+#define PICOKEY_WRONG_DKEK PICOKEYS_WRONG_DKEK
+#define PICOKEY_WRONG_SIGNATURE PICOKEYS_WRONG_SIGNATURE
+#define PICOKEY_WRONG_PADDING PICOKEYS_WRONG_PADDING
+#define PICOKEY_VERIFICATION_FAILED PICOKEYS_VERIFICATION_FAILED
+
+#define PICO_KEYS_AES_MODE_CBC PICOKEYS_AES_MODE_CBC
+
+#define search_by_fid file_search_by_fid
+#define scan_flash file_scan_flash
+#define initialize_flash file_initialize_flash
+#define low_flash_available flash_commit
+#define random_gen random_fill_iterator
+#define get_uint16_t_be get_uint16_be
+#define get_uint16_t_le get_uint16_le
+#define get_uint32_t_be get_uint32_be
+#define get_uint32_t_le get_uint32_le
+#define put_uint16_t_be put_uint16_be
+#define put_uint16_t_le put_uint16_le
+#define put_uint32_t_be put_uint32_be
+#define put_uint32_t_le put_uint32_le
+#define get_uint64_t_be get_uint64_be
+#define get_uint64_t_le get_uint64_le
+#define put_uint64_t_be put_uint64_be
+#define put_uint64_t_le put_uint64_le
+
+#define wait_button button_wait
 
 #if !defined(MIN)
 #if defined(_MSC_VER)

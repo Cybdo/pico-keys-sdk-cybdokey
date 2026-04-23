@@ -153,7 +153,7 @@ file_t *file_search_by_fid(const uint16_t fid, const file_t *parent, const uint8
     return NULL;
 }
 
-static file_t *search_dynamic_file(uint16_t fid) {
+static file_t *search_dynamic_file_local(uint16_t fid) {
     for (int i = 0; i < dynamic_files; i++) {
         if (dynamic_file[i].fid == fid) {
             return &dynamic_file[i];
@@ -167,7 +167,11 @@ file_t *file_search(const uint16_t fid) {
     if (ef) {
         return ef;
     }
-    return search_dynamic_file(fid);
+    return search_dynamic_file_local(fid);
+}
+
+file_t *search_dynamic_file(uint16_t fid) {
+    return search_dynamic_file_local(fid);
 }
 
 static uint8_t make_path_buf(const file_t *pe, uint8_t *buf, uint8_t buflen, const file_t *top) {

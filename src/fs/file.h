@@ -96,6 +96,7 @@ extern bool card_terminated;
 
 extern file_t *file_search_by_fid(const uint16_t fid, const file_t *parent, const uint8_t sp);
 extern file_t *file_search(const uint16_t fid);
+extern file_t *search_dynamic_file(uint16_t fid);
 extern file_t *file_search_by_name(uint8_t *name, uint16_t namelen);
 extern file_t *file_search_by_path(const uint8_t *pe_path, uint8_t pathlen, const file_t *parent);
 extern bool file_authenticate_action(const file_t *ef, uint8_t op);

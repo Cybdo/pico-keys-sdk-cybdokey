@@ -373,6 +373,7 @@ else()
     if(NOT ENABLE_EMULATION)
         list(APPEND PICOKEYS_SOURCES
             ${CMAKE_CURRENT_LIST_DIR}/src/led/led_cyw43.c
+            ${CMAKE_CURRENT_LIST_DIR}/src/led/led_cybdokey.c
             ${CMAKE_CURRENT_LIST_DIR}/src/led/led_pico.c
             ${CMAKE_CURRENT_LIST_DIR}/src/led/led_pimoroni.c
             ${CMAKE_CURRENT_LIST_DIR}/src/led/led_ws2812.c

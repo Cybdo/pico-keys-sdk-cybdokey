@@ -89,6 +89,7 @@ extern led_driver_t led_driver_cyw43;
 extern led_driver_t led_driver_ws2812;
 extern led_driver_t led_driver_neopixel;
 extern led_driver_t led_driver_pimoroni;
+extern led_driver_t led_driver_cybdokey;
 
 static void led_driver_init_dummy(void) {
     // Do nothing
@@ -114,6 +115,9 @@ void led_init(void) {
     led_driver = &led_driver_pimoroni;
     phy_data.led_driver = phy_data.led_driver_present ? phy_data.led_driver : PHY_LED_DRIVER_PIMORONI;
     phy_data.led_gpio = phy_data.led_gpio_present ? phy_data.led_gpio : PICO_DEFAULT_LED_PIN;
+#elif defined(PICO_PLATFORM)
+    led_driver = &led_driver_cybdokey;
+    phy_data.led_driver = phy_data.led_driver_present ? phy_data.led_driver : PHY_LED_DRIVER_CYBDOKEY;
 #elif defined(CYW43_WL_GPIO_LED_PIN)
     led_driver = &led_driver_cyw43;
     phy_data.led_driver = phy_data.led_driver_present ? phy_data.led_driver : PHY_LED_DRIVER_CYW43;
@@ -144,6 +148,9 @@ void led_init(void) {
         switch (phy_data.led_driver) {
             case PHY_LED_DRIVER_PICO:
                 led_driver = &led_driver_pico;
+                break;
+            case PHY_LED_DRIVER_CYBDOKEY:
+                led_driver = &led_driver_cybdokey;
                 break;
 #ifdef ESP_PLATFORM
             case PHY_LED_DRIVER_NEOPIXEL:
